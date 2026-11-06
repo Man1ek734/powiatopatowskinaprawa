@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0d2340">
+  <meta name="description" content="Przegląd aktualności Powiatu Opatowskiego na podstawie publicznego kanału Atom.">
+  <link rel="alternate" type="application/atom+xml" title="Aktualności Powiatu Opatowskiego" href="./aktualnosci.xml">
+  <title>Aktualności | Powiat Opatowski</title>
+  <style>
+    :root{--navy:#0d2340;--navy2:#16365a;--gold:#d6aa5f;--paper:#f4f7fb;--ink:#1c2d40;--muted:#6b7a8a;--line:#e3e9f0;--white:#fff}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6}
+    a{color:inherit}
+    .wrap{max-width:1180px;padding:0 24px;margin:0 auto}
+    .top{background:var(--navy);color:white;border-bottom:1px solid #ffffff18}
+    .top-inner{display:flex;gap:20px;justify-content:space-between;align-items:center;min-height:78px}
+    .brand{display:flex;align-items:center;gap:14px;text-decoration:none;font-weight:750;letter-spacing:.02em}
+    .seal{width:44px;height:44px;display:grid;place-items:center;color:var(--navy);background:var(--gold);border-radius:12px;font-size:22px;font-family:Georgia,serif;font-weight:bold;box-shadow:inset 0 0 0 3px #ffffff20}
+    .brand small{display:block;font-size:.71rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:#b9c9db}
+    .top-link{font-size:.85rem;text-decoration:none;color:#f5deb7;border:1px solid #ffffff38;padding:9px 15px;border-radius:100px;white-space:nowrap}
+    .top-link:hover{background:#ffffff12}
+    .hero{background:linear-gradient(125deg,#0d2340 8%,#173f64 76%,#23536f);color:white;position:relative;overflow:hidden}
+    .hero:after{content:"";position:absolute;width:470px;height:470px;border:1px solid #ffffff13;border-radius:50%;right:-95px;top:-200px;box-shadow:0 0 0 55px #ffffff05,0 0 0 110px #ffffff04;pointer-events:none}
+    .hero-inner{padding-top:70px;padding-bottom:75px;position:relative;z-index:1}
+    .eyebrow{display:flex;gap:9px;align-items:center;color:#e6c48d;font-size:.79rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700}
+    .eyebrow:before{content:"";display:block;width:26px;height:2px;background:var(--gold)}
+    h1{font-size:clamp(2.3rem,5vw,4.4rem);letter-spacing:-.05em;line-height:1.11;margin:20px 0 20px;max-width:700px}
+    .hero p{max-width:590px;color:#d2deeb;font-size:1.04rem;margin:0}
+    .hero-foot{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:30px}
+    .pill{border:1px solid #ffffff36;border-radius:100px;padding:7px 13px;color:#e8eef5;font-size:.79rem}
+    main{padding-bottom:84px}
+    .toolbar{background:white;box-shadow:0 10px 45px #0d234013;border:1px solid var(--line);border-radius:16px;padding:22px 24px;margin-top:-30px;position:relative;z-index:2;display:flex;align-items:center;gap:16px;justify-content:space-between}
+    .toolbar strong{font-size:1.04rem}
+    .toolbar small{display:block;color:var(--muted);font-size:.81rem}
+    .search{display:flex;align-items:center;gap:10px;border:1px solid #dce4ec;border-radius:12px;padding:0 14px;background:#fafcff;min-width:270px;max-width:390px;width:100%}
+    .search svg{color:#697e94;flex:none}
+    .search input{border:0;outline:0;width:100%;height:44px;background:transparent;font:inherit;font-size:.92rem;color:var(--ink)}
+    .search:focus-within{border-color:#5a7fa4;box-shadow:0 0 0 3px #35699915}
+    .section-head{margin-top:50px;margin-bottom:25px;display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+    h2{font-size:1.47rem;line-height:1.2;margin:0;letter-spacing:-.025em}
+    .section-head span{color:var(--muted);font-size:.84rem}
+    .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+    .card{background:var(--white);border:1px solid var(--line);border-radius:17px;overflow:hidden;box-shadow:0 8px 25px #152b4310;transition:transform .18s ease,box-shadow .18s ease;display:flex;flex-direction:column}
+    .card:hover{transform:translateY(-3px);box-shadow:0 16px 35px #152b4320}
+    .thumb{aspect-ratio:16/9;background:linear-gradient(135deg,#254869,#8198ab);overflow:hidden;display:block}
+    .thumb img{width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
+    .card:hover .thumb img{transform:scale(1.035)}
+    .card-inner{padding:22px 23px 24px;display:flex;flex:1;flex-direction:column;align-items:flex-start}
+    .meta{color:#7b8796;font-size:.76rem;font-weight:680;letter-spacing:.04em;text-transform:uppercase}
+    .card h3{font-size:1.09rem;line-height:1.43;letter-spacing:-.018em;margin:11px 0 9px}
+    .card h3 a{text-decoration:none}
+    .card h3 a:hover{color:#1e618e}
+    .desc{color:#687787;font-size:.88rem;line-height:1.64;margin:0 0 20px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+    .read{margin-top:auto;text-decoration:none;color:#195078;font-size:.84rem;font-weight:750}
+    .read:hover{text-decoration:underline}
+    .status{padding:45px 20px;text-align:center;background:white;border:1px dashed #ced9e4;border-radius:14px;color:#5e7082;grid-column:1/-1}
+    .bottom{border-top:1px solid var(--line);background:white;padding:28px 0;color:#708092;font-size:.81rem}
+    .bottom-inner{display:flex;gap:18px;justify-content:space-between;flex-wrap:wrap}
+    .bottom a{color:#1f547a;text-decoration:none}
+    @media(max-width:990px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:650px){.wrap{padding:0 17px}.top-inner{min-height:72px}.top-link{font-size:.75rem;padding:7px 11px}.hero-inner{padding-top:55px;padding-bottom:70px}.hero p{font-size:.95rem}.toolbar{flex-direction:column;align-items:stretch;padding:18px}.search{max-width:none;min-width:0}.section-head{margin-top:38px}.cards{grid-template-columns:1fr}.card-inner{padding:21px}.brand{gap:10px}.brand strong{font-size:.88rem}.seal{width:39px;height:39px}}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="wrap top-inner">
+      <a class="brand" href="./" aria-label="Strona główna aktualności">
+        <span class="seal" aria-hidden="true">O</span>
+        <span><strong>POWIAT OPATOWSKI</strong><small>Serwis aktualności</small></span>
+      </a>
+      <a class="top-link" href="https://opatow.pl/" target="_blank" rel="noopener noreferrer">Oficjalna witryna ↗</a>
+    </div>
+  </header>
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div class="eyebrow">Wiadomości z regionu</div>
+      <h1>Aktualności<br>z powiatu opatowskiego.</h1>
+      <p>Komunikaty, wydarzenia i informacje dla mieszkańców. Przegląd ogłoszeń udostępnionych przez Powiat Opatowski.</p>
+      <div class="hero-foot"><span class="pill" id="updated">Wczytywanie danych…</span><span class="pill" id="allCount">Aktualności</span></div>
+    </div>
+  </section>
+  <main class="wrap">
+    <div class="toolbar">
+      <div><strong>Przeglądaj aktualności</strong><small>Archiwalna kopia kanału Atom z opatow.pl</small></div>
+      <label class="search" aria-label="Wyszukaj wiadomość">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+        <input id="q" type="search" placeholder="Szukaj w aktualnościach…" autocomplete="off">
+      </label>
+    </div>
+    <div class="section-head"><h2>Ostatnie wiadomości</h2><span id="foundCount" aria-live="polite"></span></div>
+    <div class="cards" id="cards"><div class="status">Wczytywanie wiadomości…</div></div>
+  </main>
+  <footer class="bottom"><div class="wrap bottom-inner"><span>Materiały źródłowe: <a href="https://opatow.pl/" target="_blank" rel="noopener noreferrer">opatow.pl</a> — niezależny podgląd publicznych aktualności.</span><span><a href="./aktualnosci.xml">Plik XML (Atom)</a></span></div></footer>
+  <script>
+    (() => {
+      "use strict";
+      const ns = "http://www.w3.org/2005/Atom";
+      const cards = document.getElementById("cards");
+      const q = document.getElementById("q");
+      const foundCount = document.getElementById("foundCount");
+      let news = [];
+
+      function val(parent, tag) {
+        return parent.getElementsByTagNameNS(ns, tag)[0]?.textContent?.trim() || "";
+      }
+      function safeUrl(value) {
+        try {
+          const u = new URL(value);
+          return u.protocol === "https:" ? u.href : "";
+        } catch { return ""; }
+      }
+      function cardFor(item) {
+        const card = document.createElement("article");
+        card.className = "card";
+        if (item.image) {
+          const thumb = document.createElement("a");
+          thumb.className = "thumb";
+          thumb.href = item.url || "#";
+          thumb.target = "_blank";
+          thumb.rel = "noopener noreferrer";
+          const img = document.createElement("img");
+          img.src = item.image;
+          img.alt = "";
+          img.loading = "lazy";
+          img.addEventListener("error", () => { img.style.display = "none"; });
+          thumb.append(img);
+          card.append(thumb);
+        }
+        const inner = document.createElement("div");
+        inner.className = "card-inner";
+        const meta = document.createElement("div");
+        meta.className = "meta";
+        meta.textContent = item.date ? new Date(item.date).toLocaleDateString("pl-PL", {day:"numeric", month:"long", year:"numeric", timeZone:"Europe/Warsaw"}) : "Aktualność";
+        const heading = document.createElement("h3");
+        const title = document.createElement("a");
+        title.href = item.url || "#";
+        title.target = "_blank";
+        title.rel = "noopener noreferrer";
+        title.textContent = item.title;
+        heading.append(title);
+        const desc = document.createElement("p");
+        desc.className = "desc";
+        desc.textContent = item.summary && item.summary !== "(brak opisu)" ? item.summary : "Przeczytaj pełną treść ogłoszenia na oficjalnej stronie.";
+        const more = document.createElement("a");
+        more.className = "read";
+        more.href = item.url || "#";
+        more.target = "_blank";
+        more.rel = "noopener noreferrer";
+        more.textContent = "Czytaj więcej →";
+        inner.append(meta, heading, desc, more);
+        card.append(inner);
+        return card;
+      }
+      function render() {
+        const query = q.value.trim().toLocaleLowerCase("pl-PL");
+        const filtered = news.filter(n => (n.title + " " + n.summary).toLocaleLowerCase("pl-PL").includes(query));
+        foundCount.textContent = filtered.length + (filtered.length === 1 ? " wiadomość" : " wiadomości");
+        cards.replaceChildren();
+        if (!filtered.length) {
+          const el = document.createElement("div");
+          el.className = "status";
+          el.textContent = "Nie znaleziono aktualności pasujących do wyszukiwania.";
+          cards.append(el);
+          return;
+        }
+        cards.append(...filtered.map(cardFor));
+      }
+      fetch("./aktualnosci.xml", { cache:"no-cache" })
+        .then(response => { if (!response.ok) throw new Error("Nie można pobrać pliku XML."); return response.text(); })
+        .then(source => {
+          const doc = new DOMParser().parseFromString(source, "application/xml");
+          if (doc.querySelector("parsererror")) throw new Error("Błąd składni XML.");
+          news = Array.from(doc.getElementsByTagNameNS(ns, "entry")).map(entry => {
+            const link = Array.from(entry.getElementsByTagNameNS(ns, "link"));
+            return {
+              title: val(entry, "title"),
+              summary: val(entry, "summary"),
+              date: val(entry, "updated"),
+              url: safeUrl(link.find(l => l.getAttribute("rel") === "alternate")?.getAttribute("href") || val(entry,"id")),
+              image: safeUrl(link.find(l => l.getAttribute("rel") === "enclosure")?.getAttribute("href") || "")
+            };
+          });
+          const updated = doc.documentElement.getElementsByTagNameNS(ns, "updated")[0]?.textContent;
+          if (updated) document.getElementById("updated").textContent = "Stan danych: " + new Date(updated).toLocaleDateString("pl-PL",{day:"numeric",month:"long",year:"numeric",timeZone:"Europe/Warsaw"});
+          document.getElementById("allCount").textContent = news.length + " aktualności";
+          render();
+        })
+        .catch(err => {
+          cards.replaceChildren();
+          const el = document.createElement("div");
+          el.className = "status";
+          el.textContent = "Nie udało się wczytać aktualności. Sprawdź plik aktualnosci.xml i odśwież stronę.";
+          cards.append(el);
+          foundCount.textContent = "";
+          console.error(err);
+        });
+      q.addEventListener("input", render);
+    })();
+  </script>
+</body>
+</html>
